@@ -37,12 +37,12 @@ public final class WarDupes {
         warEntries.stream().filter(entry -> !entry.isDirectory() && entry.getName().startsWith("WEB-INF/lib/") && entry.getName().endsWith(".jar"))
                 .forEach(wrapExc((ZipEntry entry) -> detector.processJar(entry, null)));
 
-        System.out.println(String.format("%s processed. %d class(es), %d duplicate(s)", args[0], detector.files.size(), detector.duplicates.size()));
+        System.out.printf("%s processed. %d class(es), %d duplicate(s)%n", args[0], detector.files.size(), detector.duplicates.size());
         System.out.println();
         for (final Map.Entry<String, List<FileInfo>> duplicates : detector.duplicates.entrySet()) {
             System.out.println(duplicates.getKey());
             for (final FileInfo duplicate : duplicates.getValue()) {
-                System.out.println(String.format("\t%s\t%s\t%d bytes, %s", duplicate.parentPath, duplicate.path, duplicate.size, duplicate.hash));
+                System.out.printf("\t%s\t%s\t%d bytes, %s%n", duplicate.parentPath, duplicate.path, duplicate.size, duplicate.hash);
             }
             System.out.println();
         }

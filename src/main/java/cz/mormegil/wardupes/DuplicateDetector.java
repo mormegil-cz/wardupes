@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 public class DuplicateDetector {
     public final Map<String, FileInfo> files = new HashMap<>();
-    public final Map<String, List<FileInfo>> duplicates = new HashMap<>();
+    public final SortedMap<String, List<FileInfo>> duplicates = new TreeMap<>();
 
     private final ZipFile zipFile;
 
