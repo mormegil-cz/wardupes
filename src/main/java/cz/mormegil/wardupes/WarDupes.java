@@ -2,6 +2,7 @@ package cz.mormegil.wardupes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -41,8 +42,10 @@ public final class WarDupes {
         System.out.println();
         for (final Map.Entry<String, List<FileInfo>> duplicates : detector.duplicates.entrySet()) {
             System.out.println(duplicates.getKey());
-            for (final FileInfo duplicate : duplicates.getValue()) {
-                System.out.printf("\t%s\t%s\t%d bytes, %s%n", duplicate.parentPath, duplicate.path, duplicate.size, duplicate.hash);
+            final List<FileInfo> files = duplicates.getValue();
+            files.sort(Comparator.comparing(fi -> fi.parentPath() == null ? "" : fi.parentPath()));
+            for (final FileInfo duplicate : files) {
+                System.out.printf("\t%s\t%s\t%d bytes, %s%n", duplicate.parentPath(), duplicate.path(), duplicate.size(), duplicate.hash());
             }
             System.out.println();
         }

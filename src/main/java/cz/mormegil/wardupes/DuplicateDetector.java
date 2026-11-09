@@ -35,7 +35,7 @@ public class DuplicateDetector {
         this.zipFile = zipFile;
     }
 
-    public void addClass(ZipEntry entry, ZipEntry parent, String ignorePrefix, String classHash) throws IOException {
+    public void addClass(ZipEntry entry, ZipEntry parent, String ignorePrefix, String classHash) {
         String path = entry.getName();
         if (ignorePrefix != null && path.startsWith(ignorePrefix)) path = path.substring(ignorePrefix.length());
         final FileInfo fileInfo = new FileInfo(parent == null ? null : parent.getName(), path, classHash, entry.getSize());
